@@ -1,0 +1,1 @@
+Armazenar em media arquivos de imagens, css, videos, isto é, arquivos estáticos acessíveis publicamente.
