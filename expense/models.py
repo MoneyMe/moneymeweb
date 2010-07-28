@@ -7,7 +7,7 @@ from django.db.models import exceptions as model_exceptions
 from django.db.models.signals import post_save
 from django.db.models import ObjectDoesNotExist
 
-from managers import SubExpendCategoryManager
+from managers import SubExpendTypeManager
 
 
 #- TransactionType: income, expend 
@@ -25,16 +25,41 @@ TRANSACTION_STATUS = (
                       (TRANSACTION_STATUS_NOT_APPROVED, u'Unapproved')
                       )
 
+
 #Tipos de despesas. Ex. Supermercado, restaurante e lanchonete, combustíveis, etc.
 class ExpendCategory(models.Model):
-	title = models.CharField(u'Title',max_length=100, blank=False, null=False)
+    """
+    # Test behavior -  Not too much to test :P
+    >>> a = ExpendType.objects.create(title="Alimentação")
+    >>> b = ExpendType.objects.create(title="Fast Food")
+    >>> c = ExpendType.objects.create(title="Churrascaria")
+    >>> b.parent = a
+    >>> c.parent = a
+    >>> b.save()
+    >>> c.save()
+    >>> ExpendType.children.of(a)
+    [<ExpendType: Churrascaria>, <ExpendType: Fast Food>]
+    >>> d = ExpendType.objects.create(title="Habitação")
+    >>> e = ExpendType.objects.create(title="Aluguel")
+    >>> e.parent = d
+    >>> e.save()
+    >>> ExpendType.children.of(a)
+    [<ExpendType: Churrascaria>, <ExpendType: Fast Food>]
+    >>> ExpendType.children.of(d)
+    [<ExpendType: Aluguel>]
+    """
+    title = models.CharField(u'Título',max_length=100, blank=False, null=False)
+    parent = models.ForeignKey('self', null=True)
+    objects = models.Manager()
+    children = SubExpendTypeManager()
     
-	def __unicode__(self):
-		return self.title
-		
-	class Meta:
-		ordering = ('title',)
-		verbose_name_plural = "Expense Categories"		
+    def __unicode__(self):
+        return self.title
+    
+    class Meta:
+        ordering = ('title',)
+        verbose_name_plural = "Expense Categories"
+
 
 #Papel do Fornecedor/Provedor das informações dos gastos
 class UserProfile(models.Model):

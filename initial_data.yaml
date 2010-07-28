@@ -1,0 +1,26 @@
+- fields:
+    codename: can_confirm_expend
+    content_type: [expense, transaction]
+    name: Permission to insert expend to client
+  model: auth.permission
+  pk: 51
+- fields:
+    codename: can_insert_expend_for_client
+    content_type: [expense, transaction]
+    name: Permission to insert expend to client
+  model: auth.permission
+  pk: 50
+
+- fields:
+    name: Supplier
+    permissions:
+    - [can_insert_expend_for_client, expense, transaction]
+  model: auth.group
+  pk: 1
+- fields:
+    name: Client
+    permissions:
+    - [can_confirm_expend, expense, transaction]
+  model: auth.group
+  pk: 2
+

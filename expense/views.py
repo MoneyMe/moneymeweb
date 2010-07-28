@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response, HttpResponseRedirect
 from django.core.urlresolvers import reverse
-from forms import LoginForm
+from moneymeweb.expense.forms import LoginForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
