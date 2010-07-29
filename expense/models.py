@@ -30,23 +30,23 @@ TRANSACTION_STATUS = (
 class ExpendCategory(models.Model):
     """
     # Test behavior -  Not too much to test :P
-    >>> a = ExpendType.objects.create(title="Alimentação")
-    >>> b = ExpendType.objects.create(title="Fast Food")
-    >>> c = ExpendType.objects.create(title="Churrascaria")
+    >>> a = ExpendCategory.objects.create(title="Alimentação")
+    >>> b = ExpendCategory.objects.create(title="Fast Food")
+    >>> c = ExpendCategory.objects.create(title="Churrascaria")
     >>> b.parent = a
     >>> c.parent = a
     >>> b.save()
     >>> c.save()
-    >>> ExpendType.children.of(a)
-    [<ExpendType: Churrascaria>, <ExpendType: Fast Food>]
-    >>> d = ExpendType.objects.create(title="Habitação")
-    >>> e = ExpendType.objects.create(title="Aluguel")
+    >>> ExpendCategory.children.of(a)
+    [<ExpendCategory: Churrascaria>, <ExpendCategory: Fast Food>]
+    >>> d = ExpendCategory.objects.create(title="Habitação")
+    >>> e = ExpendCategory.objects.create(title="Aluguel")
     >>> e.parent = d
     >>> e.save()
-    >>> ExpendType.children.of(a)
-    [<ExpendType: Churrascaria>, <ExpendType: Fast Food>]
-    >>> ExpendType.children.of(d)
-    [<ExpendType: Aluguel>]
+    >>> ExpendCategory.children.of(a)
+    [<ExpendCategory: Churrascaria>, <ExpendCategory: Fast Food>]
+    >>> ExpendCategory.children.of(d)
+    [<ExpendCategory: Aluguel>]
     """
     title = models.CharField(u'Título',max_length=100, blank=False, null=False)
     parent = models.ForeignKey('self', null=True)
