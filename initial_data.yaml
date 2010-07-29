@@ -24,3 +24,16 @@
   model: auth.group
   pk: 2
 
+- fields: {parent: null, title: Bills}
+  model: expense.expendcategory
+  pk: 4
+- fields: {parent: null, title: Clothes}
+  model: expense.expendcategory
+  pk: 2
+- fields: {parent: null, title: Food}
+  model: expense.expendcategory
+  pk: 1
+- fields: {parent: null, title: Taxes}
+  model: expense.expendcategory
+  pk: 3
+
