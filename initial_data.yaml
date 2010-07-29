@@ -1,7 +1,7 @@
 - fields:
     codename: can_confirm_expend
     content_type: [expense, transaction]
-    name: Permission to insert expend to client
+    name: Permission to confirm expend to client
   model: auth.permission
   pk: 51
 - fields:
