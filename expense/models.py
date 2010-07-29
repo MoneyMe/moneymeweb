@@ -109,23 +109,27 @@ post_save.connect(post_save_user, sender=User)
     
 #Lançamento de despesas e receitas. 
 class Transaction(models.Model):
-	transaction_type = models.CharField(u'Type',max_length=2, choices=TRANSACTION_TYPE, default=TRANSACTION_TYPE_EXPEND)
-	date = models.DateTimeField(u'Date',default=datetime.now, blank=True, null=False)
-	amount = models.DecimalField(u'Amount', max_digits=19, decimal_places=8, blank=False, null=False)
-	title = models.CharField(u'Title',max_length=100, blank=True, null=True)
-	description = models.TextField(u'Description', blank=True, null=True)
-	status = models.CharField(u'Status',max_length=2, choices=TRANSACTION_STATUS, default=TRANSACTION_STATUS_NOT_APPROVED)
-	expend_category = models.ForeignKey(ExpendCategory)
-	provider = models.ForeignKey(User,related_name="place")
-	user = models.ForeignKey(User,related_name="user")
-	
-	def __unicode__(self):
-		return self.title
-		
-	class Meta:
-		ordering = ('transaction_type','date', 'expend_category', 'provider',)
-		verbose_name_plural = "Transactions"		
-		
+    
+    transaction_type = models.CharField(u'Type',max_length=2, choices=TRANSACTION_TYPE, default=TRANSACTION_TYPE_EXPEND)
+    date = models.DateTimeField(u'Date',default=datetime.now, blank=True, null=False)
+    amount = models.DecimalField(u'Amount', max_digits=19, decimal_places=8, blank=False, null=False)
+    title = models.CharField(u'Title',max_length=100, blank=True, null=True)
+    description = models.TextField(u'Description', blank=True, null=True)
+    status = models.CharField(u'Status',max_length=2, choices=TRANSACTION_STATUS, default=TRANSACTION_STATUS_NOT_APPROVED)
+    expend_category = models.ForeignKey(ExpendCategory)
+    provider = models.ForeignKey(User,related_name="place")
+    user = models.ForeignKey(User,related_name="user")
+
+    def __unicode__(self):
+        return self.title
+    
+
+    class Meta:
+        ordering = ('transaction_type','date', 'expend_category', 'provider',)
+        verbose_name_plural = "Transactions"
+    
+
+        
 #Orçamento das receitas e despesas no mês.    
 class TransactionPlanned(models.Model):
     amount = models.DecimalField(u'Amount', max_digits=19, decimal_places=8, blank=False, null=False)

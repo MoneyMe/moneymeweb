@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     (r'^admin/', include(admin.site.urls)),
+    (r'^api/', include('moneymeweb.api.urls')),
     (r'^public/(.*)$', 'django.views.static.serve',
         {'document_root' : settings.MEDIA_ROOT} ),
     url(r'^login/', 'django.contrib.auth.views.login', 
